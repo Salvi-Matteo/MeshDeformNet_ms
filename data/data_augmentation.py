@@ -51,6 +51,8 @@ def generate_seg_aug_dataset(im_dir, mask_dir, out_dir, modality, mode='train', 
             glob.glob(os.path.join(mask_dir, '*.nii')))
         fns_all = []
         fns_all_masks = []
+
+        print("\n",os.path.join(im_dir, '*.nii.gz'), "\n")########################
         nums = []
         for i in range(AUG_NUM):
             fns_all += fns
@@ -80,9 +82,16 @@ def generate_seg_aug_dataset(im_dir, mask_dir, out_dir, modality, mode='train', 
         nums_scatter = comm.scatter(nums_scatter, root = 0)
         fns_masks_scatter = comm.scatter(fns_masks_scatter, root = 0)
         fns_scatter  = comm.scatter(fns_scatter, root = 0)
-    for fn, fn_mask, aug_id in zip(fns_scatter, fns_masks_scatter, nums_scatter):
+
+    #print("\n",fns_scatter,fns_masks_scatter,nums_scatter ,"\n") ###########################################
+
+    for fn, fn_mask, aug_id in zip(fns_scatter[0], fns_masks_scatter[0], nums_scatter[0]): ######### aggiunto[0]
+
+        print("\n",fn,fn_mask ,aug_id,"\n") ###########################################
+
         name = os.path.basename(fn).split(os.extsep, 1)[0]
         name_seg = os.path.basename(fn_mask).split(os.extsep, 1)[0]
+        print("\n",name,name_seg ,"\n")
         assert name == name_seg , "Image and mask file names do not match!"
         image = sitk.ReadImage(fn)
         mask = sitk.ReadImage(fn_mask)
