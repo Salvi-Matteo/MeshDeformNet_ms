@@ -1,0 +1,11 @@
+import subprocess
+
+def install_libraries():
+    # Activate the conda environment
+    subprocess.run(["conda", "activate", "myenv"], check=True)
+
+    # Install libraries from requirements.txt
+    subprocess.run(["pip", "install", "-r", "requirements.txt"], check=True)
+
+if __name__ == "__main__":
+    install_libraries()
