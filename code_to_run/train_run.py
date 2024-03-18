@@ -3,8 +3,8 @@ import subprocess
 
 subprocess.call([
     "python",    "train_gcn.py",
-    "--im_train",   "/content/drive/MyDrive/Processed Images",
-    "--im_val",    "/content/drive/MyDrive/Processed Images",
+    "--im_train",   "/content/drive/MyDrive/Processed_dataset",
+    "--im_val",    "/content/drive/MyDrive/Processed_dataset",
     "--mesh_txt",    "data/template/mesh_info_ct.txt",    "data/template/mesh_info_mr.txt",
     "--mesh",    "data/template/data_aux.dat",
     "--attr_trains",    "",
