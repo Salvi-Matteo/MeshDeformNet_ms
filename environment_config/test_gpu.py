@@ -1,2 +1,2 @@
 import tensorflow as tf
-print(tf.test.is_gpu_avaible())
+print(tf.test.is_gpu_available())
